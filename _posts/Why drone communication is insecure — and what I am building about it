@@ -1,0 +1,50 @@
+---
+layout: post
+title: "Why drone communication is insecure — and what I am building about it"
+date: 2026-03-20
+categories: [research, aerospace-security]
+tags: [mavlink, drones, security, vimana]
+---
+
+I am building SENTINEL — a tool that monitors MAVLink drone 
+communication and detects attacks. This post explains the 
+problem it is trying to solve, in plain terms, before I get 
+into the technical details of how it works.
+
+## What is MAVLink
+
+MAVLink is the protocol drones use to communicate with their 
+ground control stations. When you fly a drone and see its 
+position on a map, its battery level, its speed — all of that 
+information is being sent over MAVLink. When you tell the drone 
+to go somewhere or land — that command goes over MAVLink.
+
+It was designed to be lightweight and reliable. It was not 
+designed to be secure.
+
+## The core problem
+
+MAVLink version 1 has no authentication. This means any device 
+on the same network can send commands to a drone and the drone 
+will follow them — because there is no way for the drone to 
+verify who is sending the command.
+
+This creates some serious attack possibilities...
+
+## What I am building
+
+SENTINEL is a passive monitoring tool. It sits on the network 
+and listens to MAVLink traffic. When something looks wrong it 
+raises an alert. It never transmits anything — the drone does 
+not know SENTINEL is there.
+
+I am building it as part of VIMANA — my aerospace security 
+research platform.
+
+The code is at github.com/sumitguptaaa/sentinel — actively 
+in development.
+
+I will write more detailed posts as each component gets built 
+and tested.
+```
+
