@@ -1,0 +1,13 @@
+title: Sumit Gupta
+description: Security researcher. VIMANA aerospace security platform. CPTS.
+url: https://sumitguptaaa.github.io
+author: Sumit Gupta
+theme: jekyll-theme-minimal
+
+# Navigation
+header_pages:
+  - about.md
+
+# Build
+markdown: kramdown
+highlighter: rouge
