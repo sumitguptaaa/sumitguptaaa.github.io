@@ -1,13 +1,27 @@
 title: Sumit Gupta
-description: Security researcher. VIMANA aerospace security platform. CPTS.
+description: Aerospace security researcher. Building VIMANA — MAVLink IDS, RF analysis, satellite security.
 url: https://sumitguptaaa.github.io
 author: Sumit Gupta
-theme: jekyll-theme-minimal
+email: sijsumitgupta@gmail.com
+github_username: sumitguptaaa
+
+# Build
+theme: minima
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+# Sass
+sass:
+  style: compressed
 
 # Navigation
 header_pages:
   - about.md
 
-# Build
-markdown: kramdown
-highlighter: rouge
+# Exclude from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
