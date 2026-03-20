@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} — {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<svg class="circuit-bg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <g stroke="#00ff9d" stroke-width="1" fill="none" opacity="1">
+    <path d="M0,100 H200 V150 H400 V100 H600"/>
+    <path d="M100,0 V200 H150 V350 H100 V500"/>
+    <path d="M300,0 V80 H500 V180 H700 V80"/>
+    <path d="M0,300 H120 V400 H280 V300 H450 V450 H600"/>
+    <path d="M650,100 V300 H750 V450"/>
+    <path d="M200,500 H350 V400 H500 V550 H700"/>
+    <circle cx="200" cy="150" r="4" fill="#00ff9d" opacity=".5"/>
+    <circle cx="400" cy="100" r="4" fill="#00ff9d" opacity=".5"/>
+    <circle cx="150" cy="350" r="4" fill="#ffb000" opacity=".5"/>
+    <circle cx="450" cy="300" r="6" fill="#00ff9d" opacity=".3"/>
+    <circle cx="500" cy="180" r="4" fill="#ffb000" opacity=".5"/>
+    <circle cx="350" cy="400" r="4" fill="#00ff9d" opacity=".5"/>
+    <circle cx="280" cy="300" r="5" fill="#ffb000" opacity=".4"/>
+    <circle cx="750" cy="300" r="4" fill="#00ff9d" opacity=".5"/>
+    <rect x="90" y="190" width="20" height="12" stroke="#ffb000" opacity=".4"/>
+    <rect x="290" y="70" width="20" height="12" stroke="#ffb000" opacity=".4"/>
+    <rect x="640" y="90" width="20" height="12" stroke="#00ff9d" opacity=".4"/>
+    <rect x="440" y="440" width="20" height="12" stroke="#ffb000" opacity=".4"/>
+  </g>
+</svg>
+
+<div class="status-bar">
+  <span><span class="live">●</span> SENTINEL ACTIVE</span>
+  <span>SYSID:01 <span class="ok">ONLINE</span></span>
+  <span>RULES: <span class="ok">6/6</span></span>
+  <span>FREQ: <span class="ok">1575.42 MHz</span></span>
+  <span>28.6139°N 77.2090°E</span>
+</div>
+
+<div class="site-wrap">
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-title" href="{{ '/' | relative_url }}">
+        SUMIT<span>GUPTA</span>
+      </a>
+      <nav class="site-nav">
+        <a href="{{ '/about' | relative_url }}">About</a>
+        <a href="{{ '/projects' | relative_url }}">Projects</a>
+        <a href="{{ '/' | relative_url }}">Blog</a>
+        <a href="https://github.com/sumitguptaaa" target="_blank">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-content">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand">VIMANA // SUMIT GUPTA // {{ site.time | date: '%Y' }}</div>
+    <div class="footer-links">
+      <a href="https://github.com/sumitguptaaa" target="_blank">GitHub</a>
+      <a href="https://github.com/sumitguptaaa/sentinel" target="_blank">SENTINEL</a>
+      <a href="mailto:sijsumitgupta@gmail.com">Email</a>
+    </div>
+    <div class="coords">28.6139°N 77.2090°E // DEL</div>
+  </footer>
+
+</div>
+
+<script>
+// Generate stars
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 150; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  const size = Math.random() * 2 + 0.4;
+  s.style.cssText = `width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;animation-duration:${2+Math.random()*5}s;animation-delay:${Math.random()*5}s`;
+  starsEl.appendChild(s);
+}
+</script>
+
+</body>
+</html>
