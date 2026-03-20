@@ -1,0 +1,182 @@
+---
+layout: default
+---
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">// AEROSPACE SECURITY RESEARCHER</div>
+  <h1 class="hero-title">
+    VIMANA
+    <span class="hero-accent">Security Platform</span>
+  </h1>
+  <p class="hero-sub">
+    Building <span class="hl">SENTINEL</span> — passive IDS for MAVLink drone networks.<br>
+    Hardware hacking · RF signal analysis · Satellite security.<br>
+    Top <span class="hl">1%</span> TryHackMe &nbsp;·&nbsp; HTB CPTS (in progress) &nbsp;·&nbsp; IIT Kanpur C3iHub
+  </p>
+
+  <div class="terminal">
+    <div class="t-line"><span class="t-prompt">$</span><span>sentinel --connect udp:127.0.0.1:14550</span></div>
+    <div class="t-line"><span class="t-prompt"> </span><span class="t-out">[ OK ] MAVLink connection established. SysID=1</span></div>
+    <div class="t-line"><span class="t-prompt"> </span><span class="t-out">[ ** ] Learning phase: 30s baseline collection...</span></div>
+    <div class="t-line"><span class="t-prompt"> </span><span class="t-out">[ OK ] Detection active. Rules: 6/6 loaded.</span></div>
+    <div class="t-line"><span class="t-prompt">_</span><span class="cursor"></span></div>
+  </div>
+
+  <div class="tags">
+    <div class="tag g">MAVLink</div>
+    <div class="tag g">Drone Security</div>
+    <div class="tag g">IDS/IPS</div>
+    <div class="tag a">RF Analysis</div>
+    <div class="tag a">GAGAN SBAS</div>
+    <div class="tag g">Hardware Hacking</div>
+    <div class="tag g">Python</div>
+    <div class="tag a">GNU Radio</div>
+  </div>
+</section>
+
+<!-- RF SPECTRUM -->
+<div class="rf-section">
+  <canvas class="spectrum" id="spectrum"></canvas>
+</div>
+
+<!-- PROJECTS -->
+<div class="section-label">VIMANA // Active Projects</div>
+<div class="projects">
+
+  <div class="project active">
+    <div class="proj-header">
+      <div class="proj-name">SENTINEL</div>
+      <div class="proj-status status-active">ACTIVE</div>
+    </div>
+    <div class="proj-desc">Passive MAVLink intrusion detection system. 6 detection rules. Real-time anomaly analysis across drone communication streams.</div>
+    <div class="proj-tags">
+      <span class="proj-tag lit">Python</span>
+      <span class="proj-tag lit">pymavlink</span>
+      <span class="proj-tag lit">IDS</span>
+      <span class="proj-tag">ArduPilot SITL</span>
+    </div>
+    <a href="https://github.com/sumitguptaaa/sentinel" class="proj-link" target="_blank">github.com/sumitguptaaa/sentinel →</a>
+  </div>
+
+  <div class="project planned">
+    <div class="proj-header">
+      <div class="proj-name">ARGUS</div>
+      <div class="proj-status status-planned">PLANNED</div>
+    </div>
+    <div class="proj-desc">Distributed aerospace threat intelligence. Correlates SENTINEL alerts across multiple drones. REST API for threat indicators.</div>
+    <div class="proj-tags">
+      <span class="proj-tag">Python</span>
+      <span class="proj-tag">SQLite</span>
+      <span class="proj-tag">Flask</span>
+    </div>
+  </div>
+
+  <div class="project planned">
+    <div class="proj-header">
+      <div class="proj-name">HELIX</div>
+      <div class="proj-status status-planned">PLANNED</div>
+    </div>
+    <div class="proj-desc">DTH dish repurposed as directional RF antenna. Drone signal characterisation and direction finding. GNU Radio pipeline.</div>
+    <div class="proj-tags">
+      <span class="proj-tag">SDR</span>
+      <span class="proj-tag">GNU Radio</span>
+      <span class="proj-tag">RF</span>
+    </div>
+  </div>
+
+  <div class="project future">
+    <div class="proj-header">
+      <div class="proj-name">NAKSHATRA</div>
+      <div class="proj-status status-future">2028</div>
+    </div>
+    <div class="proj-desc">GAGAN SBAS security analysis. India's satellite navigation augmentation system — first public security assessment.</div>
+    <div class="proj-tags">
+      <span class="proj-tag">SBAS</span>
+      <span class="proj-tag">GAGAN</span>
+      <span class="proj-tag">Research</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- POSTS -->
+<div class="section-label">Latest // Research &amp; Writeups</div>
+<div class="posts">
+  {% for post in site.posts %}
+  <div class="post-item">
+    <div class="post-date">{{ post.date | date: "%Y-%m-%d" }}</div>
+    <div class="post-body">
+      <a class="post-title" href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      {% if post.excerpt %}
+      <div class="post-excerpt">{{ post.excerpt | strip_html | truncate: 140 }}</div>
+      {% endif %}
+      {% if post.tags %}
+      <div class="post-cats">
+        {% for tag in post.tags %}<span class="post-cat">{{ tag }}</span>{% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<script>
+// RF Spectrum animation
+const canvas = document.getElementById('spectrum');
+if (canvas) {
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const W = canvas.offsetWidth;
+  const H = 70;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  ctx.scale(dpr, dpr);
+  let frame = 0;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = 'rgba(0,255,157,0.06)';
+    ctx.lineWidth = 1;
+    for (let x = 0; x < W; x += 40) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+    }
+    for (let y = 0; y < H; y += 17) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+    }
+    ctx.beginPath();
+    for (let x = 0; x < W; x++) {
+      const t = x / W;
+      const noise = Math.sin(t*40+frame*0.05)*3 + Math.sin(t*15+frame*0.03)*5 + Math.sin(t*7+frame*0.08)*8 + Math.random()*3;
+      const peak1 = Math.exp(-Math.pow((t-0.28)*20,2)) * 35;
+      const peak2 = Math.exp(-Math.pow((t-0.65)*15,2)) * 28;
+      const y = H - 8 - noise - peak1 - peak2;
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.lineTo(W, H); ctx.closePath();
+    const grad = ctx.createLinearGradient(0, 0, 0, H);
+    grad.addColorStop(0, 'rgba(0,255,157,0.35)');
+    grad.addColorStop(1, 'rgba(0,255,157,0.02)');
+    ctx.fillStyle = grad; ctx.fill();
+    ctx.beginPath();
+    for (let x = 0; x < W; x++) {
+      const t = x / W;
+      const noise = Math.sin(t*40+frame*0.05)*3 + Math.sin(t*15+frame*0.03)*5 + Math.sin(t*7+frame*0.08)*8 + Math.random()*3;
+      const peak1 = Math.exp(-Math.pow((t-0.28)*20,2)) * 35;
+      const peak2 = Math.exp(-Math.pow((t-0.65)*15,2)) * 28;
+      const y = H - 8 - noise - peak1 - peak2;
+      x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = 'rgba(0,255,157,0.85)'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.fillStyle = 'rgba(255,176,0,0.65)';
+    ctx.font = '9px "Share Tech Mono", monospace';
+    ctx.fillText('1575.42 MHz', W*0.22, H-2);
+    ctx.fillText('GAGAN L1', W*0.55, H-2);
+    ctx.fillStyle = 'rgba(0,255,157,0.35)';
+    ctx.fillText('RF SPECTRUM MONITOR', 4, 11);
+    frame++;
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+</script>
