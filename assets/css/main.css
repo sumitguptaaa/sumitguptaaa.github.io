@@ -253,12 +253,21 @@ a:hover {
   transform: translate(0.035em, 0.075em);
 }
 
-.hero-statement {
+.hero-domains {
   max-width: 37rem;
   margin: 2.3rem 0 0;
-  color: var(--muted);
-  font-size: clamp(1rem, 2.2vw, 1.25rem);
+  color: var(--text);
+  font-size: clamp(1rem, 2.2vw, 1.22rem);
+  letter-spacing: 0.01em;
   animation: rise-in 850ms 280ms both cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.hero-statement {
+  max-width: 37rem;
+  margin: 0.35rem 0 0;
+  color: var(--muted);
+  font-size: clamp(0.92rem, 2vw, 1.05rem);
+  animation: rise-in 850ms 350ms both cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
 .hero-scroll {
@@ -890,8 +899,12 @@ a:hover {
     line-height: 0.88;
   }
 
+  .hero-domains,
   .hero-statement {
     max-width: 20rem;
+  }
+
+  .hero-domains {
     margin-top: 1.8rem;
   }
 
