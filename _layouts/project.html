@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+<article class="article project-page">
+  <header class="article-header">
+    <p class="eyebrow">project{% if page.status %}<span aria-hidden="true">&middot;</span><span>{{ page.status }}</span>{% endif %}</p>
+    <h1>{{ page.title }}</h1>
+    <p class="article-description">{{ page.description }}</p>
+    {% if page.repository %}<p><a href="{{ page.repository }}">repository &rarr;</a></p>{% endif %}
+  </header>
+  <div class="prose">
+    {{ content }}
+  </div>
+  <footer class="article-footer">
+    <a href="{{ '/projects/' | relative_url }}">&larr; projects</a>
+  </footer>
+</article>

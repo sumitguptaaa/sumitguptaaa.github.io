@@ -2,35 +2,33 @@
 layout: default
 ---
 
-<article class="post-article">
+{% assign word_count = content | number_of_words %}
+{% assign reading_minutes = word_count | divided_by: 200 | plus: 1 %}
 
-  <header class="post-header">
-    <div class="post-meta-top">
-      <span class="post-date">{{ page.date | date: "%Y-%m-%d" }}</span>
-      {% if page.categories %}
-      {% for cat in page.categories %}<span class="post-cat-tag">{{ cat }}</span>{% endfor %}
-      {% endif %}
-    </div>
-    <h1 class="post-title-big">{{ page.title }}</h1>
+<article class="article">
+  <header class="article-header">
+    <p class="eyebrow">
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y-%m-%d' }}</time>
+      <span aria-hidden="true">&middot;</span>
+      <span>{{ reading_minutes }} min</span>
+      {% if page.platform %}<span aria-hidden="true">&middot;</span><span>{{ page.platform }}</span>{% endif %}
+      {% if page.difficulty %}<span aria-hidden="true">&middot;</span><span>{{ page.difficulty }}</span>{% endif %}
+      {% if page.status %}<span aria-hidden="true">&middot;</span><span>{{ page.status }}</span>{% endif %}
+    </p>
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}<p class="article-description">{{ page.description }}</p>{% endif %}
     {% if page.tags %}
-    <div class="post-tags-row">
-      {% for tag in page.tags %}<span class="tag g">{{ tag }}</span>{% endfor %}
-    </div>
+      <p class="tag-list" aria-label="Tags">
+        {% for tag in page.tags %}{% assign tag_slug = tag | slugify %}<a href="{{ '/writing/tags/' | relative_url }}#{{ tag_slug }}">{{ tag }}</a>{% unless forloop.last %}<span aria-hidden="true">, </span>{% endunless %}{% endfor %}
+      </p>
     {% endif %}
   </header>
 
-  <div class="post-content">
+  <div class="prose">
     {{ content }}
   </div>
 
-  <footer class="post-footer">
-    <div class="post-footer-inner">
-      <a href="{{ '/' | relative_url }}" class="back-link">← All posts</a>
-      <div class="post-share">
-        <span class="share-label">Share:</span>
-        <a href="https://github.com/sumitguptaaa" target="_blank">GitHub</a>
-      </div>
-    </div>
+  <footer class="article-footer">
+    <a href="{{ '/writing/' | relative_url }}">&larr; writing</a>
   </footer>
-
 </article>
