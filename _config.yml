@@ -1,25 +1,50 @@
 title: Sumit Gupta
-description: Aerospace security researcher. Building VIMANA — MAVLink IDS, RF analysis, satellite security.
+description: Notes on reverse engineering, systems security, and AI security.
 url: https://sumitguptaaa.github.io
+baseurl: ""
 author: Sumit Gupta
 email: sijsumitgupta@gmail.com
 github_username: sumitguptaaa
+linkedin_url: https://www.linkedin.com/in/sumittguptaaa
+lang: en
 
-# Build
-theme: minima
 markdown: kramdown
 highlighter: rouge
-permalink: /:year/:month/:day/:title/
+permalink: /writing/:title/
 
-# Sass
-sass:
-  style: compressed
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
 
-# Navigation
-header_pages:
-  - about.md
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
 
-# Exclude from build
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/images/social-card.jpg
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+feed:
+  path: feed.xml
+
 exclude:
   - Gemfile
   - Gemfile.lock
