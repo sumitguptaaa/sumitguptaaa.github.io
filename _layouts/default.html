@@ -3,16 +3,22 @@
   <head>
     {% include head.html %}
   </head>
-  <body>
+  <body class="layout-{{ page.layout | default: 'page' }}">
     <a class="skip-link" href="#content">skip to content</a>
 
     <div class="site-shell">
       <header class="site-header">
         <a class="site-name" href="{{ '/' | relative_url }}">sumit gupta</a>
         <nav class="site-nav" aria-label="Primary navigation">
-          <a{% if page.url == '/writing/' or page.layout == 'post' %} aria-current="page"{% endif %} href="{{ '/writing/' | relative_url }}">writing</a>
-          <a{% if page.url == '/projects/' or page.layout == 'project' %} aria-current="page"{% endif %} href="{{ '/projects/' | relative_url }}">projects</a>
-          <a{% if page.url == '/about/' %} aria-current="page"{% endif %} href="{{ '/about/' | relative_url }}">about</a>
+          {% if page.layout == 'home' %}
+            <a href="#writing">writing</a>
+            <a href="#work">work</a>
+            <a href="#about">about</a>
+          {% else %}
+            <a{% if page.url == '/writing/' or page.layout == 'post' %} aria-current="page"{% endif %} href="{{ '/writing/' | relative_url }}">writing</a>
+            <a{% if page.url == '/projects/' or page.layout == 'project' %} aria-current="page"{% endif %} href="{{ '/projects/' | relative_url }}">projects</a>
+            <a{% if page.url == '/about/' %} aria-current="page"{% endif %} href="{{ '/about/' | relative_url }}">about</a>
+          {% endif %}
           <a href="https://github.com/{{ site.github_username }}">github</a>
         </nav>
       </header>
@@ -30,5 +36,8 @@
         </nav>
       </footer>
     </div>
+    {% if page.layout == 'home' %}
+      <script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
+    {% endif %}
   </body>
 </html>
