@@ -199,6 +199,7 @@ a:hover {
 
 .home-hero {
   position: relative;
+  isolation: isolate;
   display: flex;
   min-height: min(50rem, calc(100svh - 7rem));
   flex-direction: column;
@@ -236,7 +237,7 @@ a:hover {
   animation: rise-in 850ms 170ms both cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 
-.wordmark::after {
+.wordmark-echo {
   position: absolute;
   inset: 0;
   clip-path: inset(58% 0 0);
@@ -244,22 +245,57 @@ a:hover {
   opacity: 0.16;
   transform: translate(0.018em, 0.055em);
   transition: opacity 350ms ease, transform 350ms ease;
-  content: attr(data-text);
   pointer-events: none;
 }
 
-.home-hero:hover .wordmark::after {
+.home-hero:hover .wordmark-echo {
   opacity: 0.34;
   transform: translate(0.035em, 0.075em);
 }
 
 .hero-domains {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.5rem;
   max-width: 37rem;
   margin: 2.3rem 0 0;
   color: var(--text);
   font-size: clamp(1rem, 2.2vw, 1.22rem);
   letter-spacing: 0.01em;
   animation: rise-in 850ms 280ms both cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.domain {
+  color: var(--text);
+  cursor: default;
+  transition: color 240ms ease;
+}
+
+.domain-whisper {
+  position: absolute;
+  z-index: -1;
+  top: 42%;
+  left: 50%;
+  width: 100vw;
+  color: var(--link);
+  font-family: var(--serif);
+  font-size: clamp(5rem, 18vw, 12rem);
+  line-height: 0.8;
+  letter-spacing: -0.055em;
+  text-align: center;
+  opacity: 0;
+  transform: translate(-50%, 0.35rem);
+  transition: opacity 320ms ease, transform 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  pointer-events: none;
+}
+
+.domain:hover {
+  color: var(--link);
+}
+
+.domain:hover .domain-whisper {
+  opacity: 0.075;
+  transform: translate(-50%, 0);
 }
 
 .hero-statement {
@@ -976,6 +1012,12 @@ a:hover {
       rgba(73, 59, 84, 0.04) 34%,
       transparent 72%
     );
+  }
+}
+
+@media (hover: none) {
+  .domain-whisper {
+    display: none;
   }
 }
 
