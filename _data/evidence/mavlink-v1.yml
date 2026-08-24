@@ -1,0 +1,93 @@
+id: SG-MAV-001
+label: Signal Autopsy 001
+artifact: MAVLink v1 frame
+question: What can a receiver prove from a valid MAVLink v1 packet?
+answer: It can check the frame structure and checksum, but it cannot prove who created the packet.
+accessible_description: An eight-part MAVLink version 1 frame showing the start marker, payload length, sequence, system identifier, component identifier, message identifier, payload, and checksum.
+segments:
+  - id: magic
+    label: magic
+    value: "0xFE"
+    size: 1
+  - id: length
+    label: length
+    value: "1 byte"
+    size: 1
+  - id: sequence
+    label: sequence
+    value: "1 byte"
+    size: 1
+  - id: system
+    label: system id
+    value: "1 byte"
+    size: 1
+  - id: component
+    label: component id
+    value: "1 byte"
+    size: 1
+  - id: message
+    label: message id
+    value: "1 byte"
+    size: 1
+  - id: payload
+    label: payload
+    value: "0–255 bytes"
+    size: 5
+  - id: checksum
+    label: checksum
+    value: "2 bytes"
+    size: 2
+stages:
+  - id: specimen
+    number: "00"
+    title: specimen
+    confidence: observed
+    focus: [magic, length, sequence, system, component, message, payload, checksum]
+    human: A MAVLink frame is a compact envelope. It carries an identifier, a message type, the message data, and a checksum.
+    machine: MAVLink v1 starts with 0xFE, has a six-byte header, carries up to 255 payload bytes, and ends with a two-byte checksum.
+  - id: normal
+    number: "01"
+    title: normal state
+    confidence: observed
+    focus: [sequence, system, component, message, payload]
+    human: A vehicle and its ground station exchange these frames repeatedly. The identifiers help software route and interpret them.
+    machine: The sequence number helps detect packet loss. System and component identifiers describe the claimed source inside the network.
+  - id: fracture
+    number: "02"
+    title: fracture
+    confidence: documented
+    focus: [system, component, checksum]
+    human: The packet can say where it came from, but MAVLink v1 does not include a cryptographic signature that proves that claim.
+    machine: A valid checksum detects corruption and incompatible message definitions. It is not a sender-authentication mechanism.
+  - id: trace
+    number: "03"
+    title: trace
+    confidence: inferred
+    focus: [sequence, system, message, payload]
+    human: A passive monitor cannot add authentication. It can still look for changes that deserve investigation.
+    machine: Useful signals include a new system identifier, duplicate sequence numbers, unusual command rates, and unexpected state-changing messages.
+  - id: proof
+    number: "04"
+    title: proof
+    confidence: bounded
+    focus: [magic, payload, checksum]
+    human: A clean packet proves only that it is well formed enough to pass the protocol checks. It does not prove a trusted operator sent it.
+    machine: MAVLink 2 adds optional packet signing. MAVLink v1 frames contain no signature field.
+  - id: residual
+    number: "05"
+    title: residual signal
+    confidence: open
+    focus: [sequence, system, message]
+    human: Monitoring can surface suspicious behavior, but an alert is evidence to investigate—not automatic proof of an attack.
+    machine: Thresholds and rules must be evaluated against varied normal traffic to understand false positives and blind spots.
+prediction:
+  prompt: Before revealing the fracture, choose the strongest claim the receiver can make.
+  options:
+    - id: sender
+      label: The system identifier proves the sender is trusted.
+    - id: structure
+      label: The frame passed structural and checksum checks.
+    - id: both
+      label: Both claims are equally proven.
+  correct: structure
+  reveal: The checksum supports packet integrity, not identity. A sender can place a system identifier into a frame without cryptographically proving ownership of it.

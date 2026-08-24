@@ -4,10 +4,11 @@ layout: default
 
 <article class="page">
   <header class="page-header">
+    <p class="folio-label">public research index</p>
     <h1>{{ page.title }}</h1>
     {% if page.description %}<p>{{ page.description }}</p>{% endif %}
   </header>
-  <div class="prose">
+  <div class="{% if page.wide %}page-content{% else %}prose{% endif %}">
     {{ content }}
   </div>
 </article>

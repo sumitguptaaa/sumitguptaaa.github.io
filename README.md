@@ -1,6 +1,6 @@
 # sumitguptaaa.github.io
 
-A minimal Jekyll research notebook published with GitHub Pages.
+An experimental security research folio published with Jekyll and GitHub Pages. Investigations pair plain-language explanations with the packet, instruction, log, or trace that supports them.
 
 ## Local preview
 
@@ -23,6 +23,8 @@ JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter
 4. Preview the site locally before committing.
 
 Posts are published at `/writing/short-title/` and automatically appear in the yearly and tag archives.
+
+For a guided investigation, copy `_templates/signal-autopsy.md` and pair it with an exhibit copied from `_templates/evidence-exhibit.yml` into `_data/evidence/`. The post's `evidence` value must match the exhibit filename. Human-view text should explain the idea simply; machine-view text should state the exact artifact evidence and its confidence boundary.
 
 ## Publish a project
 

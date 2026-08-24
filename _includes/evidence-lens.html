@@ -1,0 +1,67 @@
+{% assign exhibit = site.data.evidence[include.evidence] %}
+{% if exhibit %}
+<section class="evidence-lens" data-evidence-lens style="--stage-progress: 0%" aria-labelledby="lens-title">
+  <header class="evidence-lens__header">
+    <p><span>{{ exhibit.label }}</span><strong id="lens-title">Evidence Lens</strong></p>
+    <p><span>artifact</span>{{ exhibit.id }}</p>
+  </header>
+
+  <div class="lens-controls" aria-label="Investigation stages">
+    {% for stage in exhibit.stages %}
+      <button type="button" data-lens-stage="{{ forloop.index0 }}" data-focus="{{ stage.focus | join: ',' }}" aria-controls="lens-panel-{{ stage.id }}" aria-pressed="{% if forloop.first %}true{% else %}false{% endif %}">
+        <span>{{ stage.number }}</span>
+        <strong>{{ stage.title }}</strong>
+      </button>
+    {% endfor %}
+  </div>
+
+  <div class="lens-progress" aria-hidden="true"><span></span></div>
+
+  <div class="lens-workbench">
+    <figure class="frame-specimen" aria-label="{{ exhibit.accessible_description }}">
+      <div class="frame-specimen__track">
+      {% for segment in exhibit.segments %}
+        <span class="frame-segment is-active" data-segment="{{ segment.id }}" style="--segment-size: {{ segment.size }}">
+          <strong>{{ segment.label }}</strong>
+          <small>{{ segment.value }}</small>
+        </span>
+      {% endfor %}
+      </div>
+      <figcaption><span>{{ exhibit.artifact }}</span><span>hover or focus a stage to isolate evidence</span></figcaption>
+    </figure>
+
+    <div class="lens-reading" aria-live="polite">
+      {% for stage in exhibit.stages %}
+      <article class="lens-panel{% if forloop.first %} is-active{% endif %}" id="lens-panel-{{ stage.id }}" data-lens-panel="{{ forloop.index0 }}">
+        <header><span>{{ stage.number }} / {{ stage.title }}</span><span>confidence / {{ stage.confidence }}</span></header>
+        <div class="lens-view lens-view--human">
+          <span>human view</span>
+          <p>{{ stage.human }}</p>
+        </div>
+        <div class="lens-view lens-view--machine">
+          <span>machine view</span>
+          <p>{{ stage.machine }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="prediction-gate" data-prediction>
+    <div>
+      <p class="folio-label">prediction gate / pause before the answer</p>
+      <h3>{{ exhibit.prediction.prompt }}</h3>
+    </div>
+    <div class="prediction-options">
+      {% for option in exhibit.prediction.options %}
+      <button type="button" data-prediction-option="{{ option.id }}" data-correct="{% if option.id == exhibit.prediction.correct %}true{% else %}false{% endif %}">
+        <span>0{{ forloop.index }}</span>{{ option.label }}
+      </button>
+      {% endfor %}
+    </div>
+    <p class="prediction-reveal" data-prediction-reveal hidden><span>evidence says</span>{{ exhibit.prediction.reveal }}</p>
+  </div>
+
+  <noscript><style>.lens-controls,.lens-progress{display:none}.lens-panel{display:block!important;opacity:1!important;transform:none!important}</style></noscript>
+</section>
+{% endif %}

@@ -4,10 +4,10 @@ layout: default
 
 <article class="article project-page">
   <header class="article-header">
-    <p class="eyebrow">project{% if page.status %}<span aria-hidden="true">&middot;</span><span>{{ page.status }}</span>{% endif %}</p>
+    <p class="eyebrow"><span>system record</span>{% if page.order %}<span>0{{ page.order }}</span>{% endif %}{% if page.status %}<span>{{ page.status }}</span>{% endif %}</p>
     <h1>{{ page.title }}</h1>
     <p class="article-description">{{ page.description }}</p>
-    {% if page.repository %}<p><a href="{{ page.repository }}">repository &rarr;</a></p>{% endif %}
+    {% if page.repository %}<p><a class="text-link" href="{{ page.repository }}">inspect repository <span aria-hidden="true">&#8599;</span></a></p>{% endif %}
   </header>
   <div class="prose">
     {{ content }}

@@ -1,11 +1,10 @@
 (() => {
   const root = document.documentElement;
-  const finePointer = window.matchMedia("(pointer: fine)");
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  if (!reducedMotion.matches && "IntersectionObserver" in window) {
-    root.classList.add("has-reveal");
+  root.classList.add("js");
 
+  if (!reducedMotion.matches && "IntersectionObserver" in window) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -14,25 +13,28 @@
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.12 }
+      { threshold: 0.12, rootMargin: "0px 0px -6%" }
     );
 
-    document.querySelectorAll(".reveal").forEach((section) => observer.observe(section));
+    document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+  } else {
+    document.querySelectorAll(".reveal").forEach((element) => element.classList.add("is-visible"));
   }
 
-  if (!finePointer.matches || reducedMotion.matches) return;
+  const header = document.querySelector(".site-header");
+  if (!header) return;
 
-  let frame;
+  let frame = 0;
+  const updateHeader = () => {
+    header.classList.toggle("is-condensed", window.scrollY > 28);
+    frame = 0;
+  };
 
   window.addEventListener(
-    "pointermove",
-    ({ clientX, clientY }) => {
-      if (frame) cancelAnimationFrame(frame);
-
-      frame = requestAnimationFrame(() => {
-        root.style.setProperty("--spot-x", `${clientX}px`);
-        root.style.setProperty("--spot-y", `${clientY}px`);
-      });
+    "scroll",
+    () => {
+      if (frame) return;
+      frame = requestAnimationFrame(updateHeader);
     },
     { passive: true }
   );

@@ -1,0 +1,26 @@
+id: SG-TOPIC-002
+label: Signal Autopsy 002
+artifact: Artifact name
+question: The prediction question shown before the answer
+answer: The strongest claim supported by the evidence
+accessible_description: A complete description of the interactive artifact
+segments:
+  - id: first-segment
+    label: segment label
+    value: machine value
+    size: 1
+stages:
+  - id: specimen
+    number: "00"
+    title: specimen
+    confidence: observed
+    focus: [first-segment]
+    human: Plain-language explanation.
+    machine: Exact technical evidence.
+prediction:
+  prompt: Ask the reader to form a hypothesis.
+  options:
+    - id: first
+      label: First possible claim.
+  correct: first
+  reveal: Explain what the evidence supports without scoring the reader.

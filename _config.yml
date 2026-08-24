@@ -1,5 +1,5 @@
 title: Sumit Gupta
-description: Notes on reverse engineering, systems security, and AI security.
+description: Independent research in reverse engineering, systems security, and AI security.
 url: https://sumitguptaaa.github.io
 baseurl: ""
 author: Sumit Gupta
@@ -25,7 +25,7 @@ defaults:
   - scope:
       path: ""
     values:
-      image: /assets/images/social-card.jpg
+      image: /assets/images/social-card-signal.jpg
   - scope:
       path: ""
       type: posts
