@@ -197,7 +197,7 @@ select {
 
 .site-content {
   min-height: 64vh;
-  padding: 7rem 0 8rem;
+  padding: 5.5rem 0 6rem;
 }
 
 .layout-home .site-content {
@@ -270,31 +270,106 @@ select {
 .lab-intro {
   position: relative;
   display: grid;
-  min-height: 41rem;
+  min-height: 33rem;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 1.5rem 1.25rem;
   align-items: center;
-  padding: 5rem 0 5.5rem;
+  padding: 3.25rem 0 4rem;
 }
 
 .lab-intro__specimen {
-  width: min(100%, 20rem);
+  width: 100%;
   grid-column: 1 / 5;
   margin: 0;
 }
 
-.lab-intro__specimen img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 5 / 6;
+.packet-specimen {
+  background: var(--paper-raised);
   border: 1px solid var(--line);
-  object-fit: cover;
-  transition: transform 700ms var(--ease), filter 700ms ease;
+  color: var(--ink);
+  font-size: 0.58rem;
+  font-variation-settings: "MONO" 1, "CASL" 0, "wght" 430;
 }
 
-.lab-intro__specimen:hover img {
-  filter: contrast(1.04);
-  transform: scale(0.992);
+.packet-specimen > header,
+.packet-specimen > footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.8rem;
+}
+
+.packet-specimen > header {
+  border-bottom: 1px dashed var(--line);
+}
+
+.packet-specimen > footer {
+  align-items: center;
+  border-top: 1px dashed var(--line);
+  color: var(--muted);
+}
+
+.packet-specimen > footer strong {
+  padding: 0.35rem 0.5rem;
+  background: var(--ink-deep);
+  color: var(--paper);
+  font-weight: 480;
+}
+
+.packet-specimen__raw {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  padding: 1.2rem 0.8rem;
+  border-bottom: 1px dashed var(--line);
+}
+
+.packet-specimen__raw code {
+  padding: 0.45rem 0.2rem;
+  border-right: 1px solid var(--line);
+  color: var(--ink-deep);
+  font: inherit;
+  text-align: center;
+}
+
+.packet-specimen__raw code:nth-child(6n) {
+  border-right: 0;
+}
+
+.packet-specimen__fields {
+  display: flex;
+  min-height: 9.5rem;
+  align-items: stretch;
+  padding: 0.8rem;
+}
+
+.packet-specimen__fields span {
+  display: flex;
+  min-width: 0;
+  flex: var(--field);
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.55rem;
+  border-right: 1px solid var(--line);
+}
+
+.packet-specimen__fields span:last-child {
+  border-right: 0;
+}
+
+.packet-specimen__fields .is-payload {
+  background: var(--wash);
+}
+
+.packet-specimen__fields small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.48rem;
+  text-overflow: ellipsis;
+}
+
+.packet-specimen__fields strong {
+  font-size: 0.58rem;
+  font-weight: 520;
 }
 
 .lab-intro__specimen figcaption,
@@ -333,76 +408,103 @@ select {
 
 .evidence-sequence {
   position: relative;
-  padding: 1.5rem 0 6.5rem;
+  padding: 0 0 4rem;
 }
 
 .evidence-sequence__grid {
-  position: relative;
   display: grid;
-  min-height: 38rem;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 1.25rem;
-  padding-top: 3rem;
+  grid-template-columns: repeat(3, 1fr);
+  border-left: 1px dashed var(--line);
 }
 
-.evidence-sequence__grid::before {
-  position: absolute;
-  top: 48%;
-  right: 0;
-  left: 0;
-  border-top: 1px dashed var(--line);
-  content: "";
-}
-
-.evidence-fragment {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-}
-
-.evidence-fragment--surface {
-  grid-column: 1 / 4;
-  align-self: end;
-}
-
-.evidence-fragment--signal {
-  grid-column: 5 / 9;
-  align-self: start;
-}
-
-.evidence-fragment--disassembly {
-  grid-column: 10 / -1;
-  align-self: center;
-}
-
-.evidence-fragment img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  border: 1px solid var(--line);
-  object-fit: cover;
-  filter: saturate(0.86) contrast(1.02);
-  transition: transform 700ms var(--ease), filter 420ms ease;
-}
-
-.evidence-fragment:hover img {
-  filter: saturate(1) contrast(1.05);
-  transform: translateY(-0.35rem);
-}
-
-.evidence-fragment figcaption {
+.artifact-panel {
   display: grid;
-  grid-template-columns: 2rem 1fr;
-  gap: 0.5rem;
-  padding-top: 0.65rem;
-  color: var(--muted);
-  font-size: 0.59rem;
+  min-height: 14rem;
+  grid-template-rows: auto 1fr auto;
+  padding: 1rem;
+  border-right: 1px dashed var(--line);
+  border-bottom: 1px dashed var(--line);
+  color: var(--ink);
+  font-size: 0.58rem;
   font-variation-settings: "MONO" 1, "CASL" 0, "wght" 430;
 }
 
-.evidence-fragment figcaption strong {
+.artifact-panel > header {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+}
+
+.artifact-panel > header strong {
   color: var(--ink);
   font-weight: 480;
+}
+
+.artifact-panel > footer {
+  color: var(--muted);
+}
+
+.artifact-panel__bytes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-self: center;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.artifact-panel__bytes code {
+  padding: 0.65rem;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font: inherit;
+  text-align: center;
+}
+
+.artifact-panel--fracture {
+  background: var(--wash);
+}
+
+.artifact-panel__equation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  align-self: center;
+  color: var(--ink-deep);
+  font-family: var(--serif);
+  font-size: clamp(1.6rem, 3vw, 2.7rem);
+}
+
+.artifact-panel__equation strong {
+  font-weight: 400;
+}
+
+.artifact-panel__equation span {
+  color: var(--muted);
+  font-family: var(--font);
+}
+
+.artifact-panel__trace {
+  display: flex;
+  height: 6.5rem;
+  align-items: flex-end;
+  align-self: center;
+  gap: 0.35rem;
+  padding: 0.8rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.artifact-panel__trace i {
+  width: 100%;
+  height: var(--h);
+  background: var(--ink);
+  opacity: 0.72;
+  transform-origin: bottom;
+  transition: transform 420ms var(--ease), opacity 180ms ease;
+}
+
+.artifact-panel:hover .artifact-panel__trace i {
+  opacity: 1;
+  transform: scaleY(0.82);
 }
 
 .evidence-sequence::after,
@@ -432,21 +534,21 @@ select {
 
 .current-autopsy,
 .entry-points {
-  padding: 4.75rem 0;
+  padding: 3.75rem 0;
 }
 
 .current-autopsy__link {
   display: grid;
   grid-template-columns: 4fr 5fr 3fr;
   gap: 2.5rem;
-  padding: 3rem 0;
+  padding: 2.25rem 0;
   border-bottom: 1px dashed var(--line);
   text-decoration: none;
 }
 
 .current-autopsy__signal {
   display: flex;
-  height: 12rem;
+  height: 10rem;
   align-items: flex-end;
   gap: 0.35rem;
   padding: 1.5rem;
@@ -1320,22 +1422,22 @@ select {
   transform: translateY(0);
 }
 
-.js .evidence-fragment {
+.js .artifact-panel {
   opacity: 0;
-  transform: translateY(2rem);
+  transform: translateY(1.25rem);
   transition: opacity 600ms ease, transform 700ms var(--ease);
 }
 
-.js .evidence-sequence.is-visible .evidence-fragment {
+.js .evidence-sequence.is-visible .artifact-panel {
   opacity: 1;
   transform: translateY(0);
 }
 
-.js .evidence-sequence.is-visible .evidence-fragment:nth-child(2) {
+.js .evidence-sequence.is-visible .artifact-panel:nth-child(2) {
   transition-delay: 110ms;
 }
 
-.js .evidence-sequence.is-visible .evidence-fragment:nth-child(3) {
+.js .evidence-sequence.is-visible .artifact-panel:nth-child(3) {
   transition-delay: 220ms;
 }
 
@@ -1346,10 +1448,6 @@ select {
 
   .lab-intro__copy {
     grid-column: 6 / -1;
-  }
-
-  .evidence-sequence__grid {
-    min-height: 32rem;
   }
 
   .current-autopsy__link {
@@ -1417,7 +1515,7 @@ select {
   .lab-intro {
     min-height: auto;
     grid-template-columns: 1fr;
-    padding: 4rem 0 6rem;
+    padding: 2.5rem 0 3.5rem;
   }
 
   .lab-intro__specimen,
@@ -1426,52 +1524,28 @@ select {
   }
 
   .lab-intro__specimen {
-    width: 64%;
+    width: 100%;
   }
 
   .lab-intro__copy {
-    margin-top: 1.5rem;
+    margin-top: 2rem;
   }
 
   .lab-intro__copy h1 {
-    font-size: clamp(3.25rem, 16vw, 5rem);
+    font-size: clamp(3rem, 14vw, 4.4rem);
   }
 
   .evidence-sequence {
-    padding-bottom: 5rem;
+    padding-bottom: 3rem;
   }
 
   .evidence-sequence__grid {
-    min-height: auto;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 2.5rem 0.8rem;
-    padding-top: 2.5rem;
-  }
-
-  .evidence-sequence__grid::before {
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 1px;
-    border-top: 0;
-    background: var(--line);
-  }
-
-  .evidence-fragment--surface {
-    grid-column: 1 / 5;
-  }
-
-  .evidence-fragment--signal {
-    grid-column: 3 / 7;
-  }
-
-  .evidence-fragment--disassembly {
-    grid-column: 1 / 5;
+    grid-template-columns: 1fr;
   }
 
   .current-autopsy,
   .entry-points {
-    padding: 4.5rem 0;
+    padding: 3rem 0;
   }
 
   .current-autopsy__link {
@@ -1489,7 +1563,7 @@ select {
 
   .entry-points nav a,
   .entry-points nav a:first-child {
-    min-height: 10rem;
+    min-height: 7.5rem;
     border-left: 1px dashed var(--line);
   }
 

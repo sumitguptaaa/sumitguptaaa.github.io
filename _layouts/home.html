@@ -4,10 +4,26 @@ layout: default
 
 <section class="lab-intro" aria-labelledby="intro-title">
   <figure class="lab-intro__specimen reveal">
-    <img src="{{ '/assets/images/mavlink-specimen-v2.jpg' | relative_url }}" alt="A flight controller connected through a telemetry test chain with radio modules and a logic probe" width="1122" height="1402">
+    <div class="packet-specimen" role="img" aria-label="An annotated MAVLink version 1 packet showing its header, payload, checksum, and unresolved sender identity">
+      <header><span>MAVLink / v1</span><span>frame specimen</span></header>
+      <div class="packet-specimen__raw" aria-hidden="true">
+        <code>FE</code><code>09</code><code>2A</code><code>01</code><code>01</code><code>00</code><code>··</code><code>··</code><code>CRC</code>
+      </div>
+      <div class="packet-specimen__fields" aria-hidden="true">
+        <span style="--field: 1"><small>stx</small><strong>FE</strong></span>
+        <span style="--field: 1"><small>len</small><strong>09</strong></span>
+        <span style="--field: 1"><small>seq</small><strong>2A</strong></span>
+        <span style="--field: 1"><small>sys</small><strong>01</strong></span>
+        <span style="--field: 1"><small>comp</small><strong>01</strong></span>
+        <span style="--field: 1"><small>msg</small><strong>00</strong></span>
+        <span class="is-payload" style="--field: 5"><small>payload</small><strong>9 bytes</strong></span>
+        <span style="--field: 2"><small>checksum</small><strong>2 bytes</strong></span>
+      </div>
+      <footer><span>structure / valid</span><strong>identity / unresolved</strong></footer>
+    </div>
     <figcaption>
-      <span>specimen / mavlink telemetry chain</span>
-      <span>system study 001</span>
+      <span>specimen / annotated frame</span>
+      <span>not a photograph</span>
     </figcaption>
   </figure>
 
@@ -22,24 +38,29 @@ layout: default
 <section class="evidence-sequence reveal" aria-labelledby="sequence-title">
   <header class="folio-rule">
     <span id="sequence-title">evidence sequence</span>
-    <span>surface / signal / disassembly</span>
+    <span>frame / fracture / trace</span>
   </header>
 
   <div class="evidence-sequence__grid">
-    <figure class="evidence-fragment evidence-fragment--surface">
-      <img src="{{ '/assets/images/evidence-surface.jpg' | relative_url }}" alt="Macro view of circuit-board traces" loading="lazy" width="549" height="758">
-      <figcaption><span>01</span><strong>surface</strong></figcaption>
-    </figure>
+    <article class="artifact-panel">
+      <header><span>01</span><strong>frame</strong></header>
+      <div class="artifact-panel__bytes" aria-label="Illustrative MAVLink frame bytes"><code>FE</code><code>09</code><code>2A</code><code>01</code><code>01</code><code>00</code></div>
+      <footer>checksum passes</footer>
+    </article>
 
-    <figure class="evidence-fragment evidence-fragment--signal">
-      <img src="{{ '/assets/images/evidence-signal.jpg' | relative_url }}" alt="Abstract captured signal seen through laboratory glass" loading="lazy" width="586" height="758">
-      <figcaption><span>02</span><strong>signal</strong></figcaption>
-    </figure>
+    <article class="artifact-panel artifact-panel--fracture">
+      <header><span>02</span><strong>fracture</strong></header>
+      <div class="artifact-panel__equation" aria-label="Valid does not mean trusted"><strong>valid</strong><span>&ne;</span><strong>trusted</strong></div>
+      <footer>identity remains unproven</footer>
+    </article>
 
-    <figure class="evidence-fragment evidence-fragment--disassembly">
-      <img src="{{ '/assets/images/evidence-disassembly.jpg' | relative_url }}" alt="Disassembled microcontroller beside probe leads" loading="lazy" width="542" height="758">
-      <figcaption><span>03</span><strong>disassembly</strong></figcaption>
-    </figure>
+    <article class="artifact-panel">
+      <header><span>03</span><strong>trace</strong></header>
+      <div class="artifact-panel__trace" aria-label="A compact monitoring trace">
+        <i style="--h: 22%"></i><i style="--h: 48%"></i><i style="--h: 31%"></i><i style="--h: 76%"></i><i style="--h: 42%"></i><i style="--h: 91%"></i><i style="--h: 54%"></i><i style="--h: 34%"></i>
+      </div>
+      <footer>anomaly / investigate</footer>
+    </article>
   </div>
 </section>
 
