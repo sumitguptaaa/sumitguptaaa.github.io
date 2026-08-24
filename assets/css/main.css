@@ -331,6 +331,105 @@ select {
   font-size: clamp(1rem, 1.6vw, 1.18rem);
 }
 
+.evidence-sequence {
+  position: relative;
+  padding: 1.5rem 0 6.5rem;
+}
+
+.evidence-sequence__grid {
+  position: relative;
+  display: grid;
+  min-height: 38rem;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.25rem;
+  padding-top: 3rem;
+}
+
+.evidence-sequence__grid::before {
+  position: absolute;
+  top: 48%;
+  right: 0;
+  left: 0;
+  border-top: 1px dashed var(--line);
+  content: "";
+}
+
+.evidence-fragment {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.evidence-fragment--surface {
+  grid-column: 1 / 4;
+  align-self: end;
+}
+
+.evidence-fragment--signal {
+  grid-column: 5 / 9;
+  align-self: start;
+}
+
+.evidence-fragment--disassembly {
+  grid-column: 10 / -1;
+  align-self: center;
+}
+
+.evidence-fragment img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border: 1px solid var(--line);
+  object-fit: cover;
+  filter: saturate(0.86) contrast(1.02);
+  transition: transform 700ms var(--ease), filter 420ms ease;
+}
+
+.evidence-fragment:hover img {
+  filter: saturate(1) contrast(1.05);
+  transform: translateY(-0.35rem);
+}
+
+.evidence-fragment figcaption {
+  display: grid;
+  grid-template-columns: 2rem 1fr;
+  gap: 0.5rem;
+  padding-top: 0.65rem;
+  color: var(--muted);
+  font-size: 0.59rem;
+  font-variation-settings: "MONO" 1, "CASL" 0, "wght" 430;
+}
+
+.evidence-fragment figcaption strong {
+  color: var(--ink);
+  font-weight: 480;
+}
+
+.evidence-sequence::after,
+.current-autopsy::before,
+.entry-points::before {
+  position: absolute;
+  left: 50%;
+  width: 1px;
+  height: 3.5rem;
+  background: var(--line);
+  content: "";
+}
+
+.evidence-sequence::after {
+  bottom: 0;
+}
+
+.current-autopsy,
+.entry-points {
+  position: relative;
+}
+
+.current-autopsy::before,
+.entry-points::before {
+  top: 0;
+}
+
 .current-autopsy,
 .entry-points {
   padding: 4.75rem 0;
@@ -1221,6 +1320,25 @@ select {
   transform: translateY(0);
 }
 
+.js .evidence-fragment {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: opacity 600ms ease, transform 700ms var(--ease);
+}
+
+.js .evidence-sequence.is-visible .evidence-fragment {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.js .evidence-sequence.is-visible .evidence-fragment:nth-child(2) {
+  transition-delay: 110ms;
+}
+
+.js .evidence-sequence.is-visible .evidence-fragment:nth-child(3) {
+  transition-delay: 220ms;
+}
+
 @media (max-width: 64rem) {
   .lab-intro__specimen {
     grid-column: 1 / 6;
@@ -1228,6 +1346,10 @@ select {
 
   .lab-intro__copy {
     grid-column: 6 / -1;
+  }
+
+  .evidence-sequence__grid {
+    min-height: 32rem;
   }
 
   .current-autopsy__link {
@@ -1313,6 +1435,38 @@ select {
 
   .lab-intro__copy h1 {
     font-size: clamp(3.25rem, 16vw, 5rem);
+  }
+
+  .evidence-sequence {
+    padding-bottom: 5rem;
+  }
+
+  .evidence-sequence__grid {
+    min-height: auto;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 2.5rem 0.8rem;
+    padding-top: 2.5rem;
+  }
+
+  .evidence-sequence__grid::before {
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    border-top: 0;
+    background: var(--line);
+  }
+
+  .evidence-fragment--surface {
+    grid-column: 1 / 5;
+  }
+
+  .evidence-fragment--signal {
+    grid-column: 3 / 7;
+  }
+
+  .evidence-fragment--disassembly {
+    grid-column: 1 / 5;
   }
 
   .current-autopsy,

@@ -19,6 +19,30 @@ layout: default
   </div>
 </section>
 
+<section class="evidence-sequence reveal" aria-labelledby="sequence-title">
+  <header class="folio-rule">
+    <span id="sequence-title">evidence sequence</span>
+    <span>surface / signal / disassembly</span>
+  </header>
+
+  <div class="evidence-sequence__grid">
+    <figure class="evidence-fragment evidence-fragment--surface">
+      <img src="{{ '/assets/images/evidence-surface.jpg' | relative_url }}" alt="Macro view of circuit-board traces" loading="lazy" width="549" height="758">
+      <figcaption><span>01</span><strong>surface</strong></figcaption>
+    </figure>
+
+    <figure class="evidence-fragment evidence-fragment--signal">
+      <img src="{{ '/assets/images/evidence-signal.jpg' | relative_url }}" alt="Abstract captured signal seen through laboratory glass" loading="lazy" width="586" height="758">
+      <figcaption><span>02</span><strong>signal</strong></figcaption>
+    </figure>
+
+    <figure class="evidence-fragment evidence-fragment--disassembly">
+      <img src="{{ '/assets/images/evidence-disassembly.jpg' | relative_url }}" alt="Disassembled microcontroller beside probe leads" loading="lazy" width="542" height="758">
+      <figcaption><span>03</span><strong>disassembly</strong></figcaption>
+    </figure>
+  </div>
+</section>
+
 {% assign featured_post = site.posts.first %}
 {% if featured_post %}
 <section id="current-autopsy" class="current-autopsy reveal" aria-labelledby="current-title">

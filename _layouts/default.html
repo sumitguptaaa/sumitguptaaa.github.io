@@ -10,15 +10,9 @@
       <header class="site-header">
         <a class="site-name" href="{{ '/' | relative_url }}"><span class="signal-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>sumit gupta</span></a>
         <nav class="site-nav" aria-label="Primary navigation">
-          {% if page.layout == 'home' %}
-            <a href="#writing">writing</a>
-            <a href="#work">work</a>
-            <a href="#about">about</a>
-          {% else %}
-            <a{% if page.url == '/writing/' or page.layout == 'post' %} aria-current="page"{% endif %} href="{{ '/writing/' | relative_url }}">writing</a>
-            <a{% if page.url == '/projects/' or page.layout == 'project' %} aria-current="page"{% endif %} href="{{ '/projects/' | relative_url }}">projects</a>
-            <a{% if page.url == '/about/' %} aria-current="page"{% endif %} href="{{ '/about/' | relative_url }}">about</a>
-          {% endif %}
+          <a{% if page.url == '/writing/' or page.layout == 'post' %} aria-current="page"{% endif %} href="{{ '/writing/' | relative_url }}">writing</a>
+          <a{% if page.url == '/projects/' or page.layout == 'project' %} aria-current="page"{% endif %} href="{{ '/projects/' | relative_url }}">projects</a>
+          <a{% if page.url == '/about/' %} aria-current="page"{% endif %} href="{{ '/about/' | relative_url }}">about</a>
           <a href="https://github.com/{{ site.github_username }}">github</a>
         </nav>
       </header>
