@@ -24,10 +24,6 @@ collections:
 defaults:
   - scope:
       path: ""
-    values:
-      image: /assets/images/social-card-signal.jpg
-  - scope:
-      path: ""
       type: posts
     values:
       layout: post

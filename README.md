@@ -38,3 +38,7 @@ Projects are published at `/projects/project-name/`.
 ## Deployment
 
 GitHub Pages builds the `main` branch from the repository root. Merging a reviewed pull request into `main` updates the live site automatically.
+
+## 3D homepage
+
+The homepage uses a layered Three.js and GSAP implementation. Three.js `0.185.1`, GSAP `3.15.0`, and ScrollTrigger `3.15.0` are pinned under `assets/vendor/`, so the published site makes no runtime requests to package CDNs. The scene renders only while visible, caps device pixel ratio, avoids external models and textures, and has static and reduced-motion fallbacks.

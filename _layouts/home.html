@@ -2,65 +2,60 @@
 layout: default
 ---
 
-<section class="lab-intro" aria-labelledby="intro-title">
-  <figure class="lab-intro__specimen reveal">
-    <div class="packet-specimen" role="img" aria-label="An annotated MAVLink version 1 packet showing its header, payload, checksum, and unresolved sender identity">
-      <header><span>MAVLink / v1</span><span>frame specimen</span></header>
-      <div class="packet-specimen__raw" aria-hidden="true">
-        <code>FE</code><code>09</code><code>2A</code><code>01</code><code>01</code><code>00</code><code>··</code><code>··</code><code>CRC</code>
-      </div>
-      <div class="packet-specimen__fields" aria-hidden="true">
-        <span style="--field: 1"><small>stx</small><strong>FE</strong></span>
-        <span style="--field: 1"><small>len</small><strong>09</strong></span>
-        <span style="--field: 1"><small>seq</small><strong>2A</strong></span>
-        <span style="--field: 1"><small>sys</small><strong>01</strong></span>
-        <span style="--field: 1"><small>comp</small><strong>01</strong></span>
-        <span style="--field: 1"><small>msg</small><strong>00</strong></span>
-        <span class="is-payload" style="--field: 5"><small>payload</small><strong>9 bytes</strong></span>
-        <span style="--field: 2"><small>checksum</small><strong>2 bytes</strong></span>
-      </div>
-      <footer><span>structure / valid</span><strong>identity / unresolved</strong></footer>
+<section class="scene-hero" data-scene-hero aria-labelledby="intro-title">
+  <div class="scene-hero__visual" aria-hidden="true">
+    <canvas data-signal-scene></canvas>
+    <div class="scene-fallback">
+      <i style="--w: 1"></i><i style="--w: 1"></i><i style="--w: 1"></i><i style="--w: 1"></i><i style="--w: 1"></i><i style="--w: 1"></i><i class="is-payload" style="--w: 5"></i><i style="--w: 2"></i>
     </div>
-    <figcaption>
-      <span>specimen / annotated frame</span>
-      <span>not a photograph</span>
-    </figcaption>
-  </figure>
+  </div>
 
-  <div class="lab-intro__copy reveal">
-    <p class="folio-label">sumit gupta / independent security research</p>
-    <h1 id="intro-title">I make hidden trust visible.</h1>
-    <p class="lab-intro__statement">Reverse engineering, systems security, and AI security—explained through evidence.</p>
-    <a class="text-link" href="#current-autopsy">enter the current investigation <span aria-hidden="true">&#8595;</span></a>
+  <div class="scene-hero__inner">
+    <div class="scene-hero__copy reveal">
+      <p class="scene-kicker">independent security research / india</p>
+      <h1 id="intro-title">sumit<br>gupta</h1>
+      <p class="scene-statement">I take systems apart until the hidden trust becomes visible.</p>
+    </div>
+
+    <div class="scene-hero__legend reveal" aria-label="Research areas">
+      <span>01 / reverse engineering</span>
+      <span>02 / systems security</span>
+      <span>03 / ai security</span>
+    </div>
+
+    <a class="scene-hero__entry" href="#current-autopsy">current investigation <span aria-hidden="true">&#8595;</span></a>
+  </div>
+
+  <div class="scene-hero__telemetry" aria-hidden="true">
+    <span>frame / mavlink v1</span>
+    <span>integrity &ne; identity</span>
+    <span>scroll / reconstruct</span>
   </div>
 </section>
 
-<section class="evidence-sequence reveal" aria-labelledby="sequence-title">
+<section class="trust-fracture reveal" data-trust-fracture aria-labelledby="sequence-title">
   <header class="folio-rule">
-    <span id="sequence-title">evidence sequence</span>
-    <span>frame / fracture / trace</span>
+    <span id="sequence-title">autopsy 001 / trust boundary</span>
+    <span>checksum / identity</span>
   </header>
 
-  <div class="evidence-sequence__grid">
-    <article class="artifact-panel">
-      <header><span>01</span><strong>frame</strong></header>
-      <div class="artifact-panel__bytes" aria-label="Illustrative MAVLink frame bytes"><code>FE</code><code>09</code><code>2A</code><code>01</code><code>01</code><code>00</code></div>
-      <footer>checksum passes</footer>
-    </article>
+  <div class="trust-fracture__body">
+    <div class="trust-fracture__statement">
+      <p class="scene-kicker">the fracture</p>
+      <h2>A valid packet can still be a lie.</h2>
+      <p>MAVLink v1 can verify structure and checksum. It cannot prove who created the frame.</p>
+    </div>
 
-    <article class="artifact-panel artifact-panel--fracture">
-      <header><span>02</span><strong>fracture</strong></header>
-      <div class="artifact-panel__equation" aria-label="Valid does not mean trusted"><strong>valid</strong><span>&ne;</span><strong>trusted</strong></div>
-      <footer>identity remains unproven</footer>
-    </article>
-
-    <article class="artifact-panel">
-      <header><span>03</span><strong>trace</strong></header>
-      <div class="artifact-panel__trace" aria-label="A compact monitoring trace">
-        <i style="--h: 22%"></i><i style="--h: 48%"></i><i style="--h: 31%"></i><i style="--h: 76%"></i><i style="--h: 42%"></i><i style="--h: 91%"></i><i style="--h: 54%"></i><i style="--h: 34%"></i>
-      </div>
-      <footer>anomaly / investigate</footer>
-    </article>
+    <ol class="frame-ledger" aria-label="MAVLink version 1 frame fields">
+      <li><span>00</span><strong>magic</strong><code>0xFE</code></li>
+      <li><span>01</span><strong>length</strong><code>1 byte</code></li>
+      <li><span>02</span><strong>sequence</strong><code>1 byte</code></li>
+      <li><span>03</span><strong>system id</strong><code>claimed</code></li>
+      <li><span>04</span><strong>component id</strong><code>claimed</code></li>
+      <li><span>05</span><strong>message id</strong><code>1 byte</code></li>
+      <li><span>06</span><strong>payload</strong><code>0–255</code></li>
+      <li><span>07</span><strong>checksum</strong><code>2 bytes</code></li>
+    </ol>
   </div>
 </section>
 

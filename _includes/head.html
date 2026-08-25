@@ -1,7 +1,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+{% if page.layout == 'home' %}
+<meta name="theme-color" content="#17141D">
+<meta name="color-scheme" content="dark">
+{% else %}
 <meta name="theme-color" content="#F2EFE7">
 <meta name="color-scheme" content="light">
+{% endif %}
 {% seo %}
 {% feed_meta %}
 <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/signal-mark.svg' | relative_url }}">
