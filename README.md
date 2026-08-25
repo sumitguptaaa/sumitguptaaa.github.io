@@ -1,6 +1,6 @@
 # sumitguptaaa.github.io
 
-A minimal Jekyll research notebook published with GitHub Pages.
+An experimental security research folio published with Jekyll and GitHub Pages. Investigations pair plain-language explanations with the packet, instruction, log, or trace that supports them.
 
 ## Local preview
 
@@ -24,6 +24,8 @@ JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter
 
 Posts are published at `/writing/short-title/` and automatically appear in the yearly and tag archives.
 
+For a guided investigation, copy `_templates/signal-autopsy.md` and pair it with an exhibit copied from `_templates/evidence-exhibit.yml` into `_data/evidence/`. The post's `evidence` value must match the exhibit filename. Human-view text should explain the idea simply; machine-view text should state the exact artifact evidence and its confidence boundary.
+
 ## Publish a project
 
 1. Copy `_templates/project-page.md` into `_projects/`.
@@ -36,3 +38,7 @@ Projects are published at `/projects/project-name/`.
 ## Deployment
 
 GitHub Pages builds the `main` branch from the repository root. Merging a reviewed pull request into `main` updates the live site automatically.
+
+## 3D homepage
+
+The homepage uses a layered Three.js and GSAP implementation. Three.js `0.185.1`, GSAP `3.15.0`, and ScrollTrigger `3.15.0` are pinned under `assets/vendor/`, so the published site makes no runtime requests to package CDNs. The scene renders only while visible, caps device pixel ratio, avoids external models and textures, and has static and reduced-motion fallbacks.

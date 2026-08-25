@@ -2,94 +2,110 @@
 layout: default
 ---
 
-<section class="home-hero" aria-labelledby="intro-title">
-  <p class="hero-kicker"><span aria-hidden="true"></span>research notebook / public log</p>
-  <h1 id="intro-title" class="wordmark">
-    <span class="wordmark-echo" aria-hidden="true">sumit gupta</span>
-    <span>sumit gupta</span>
-  </h1>
-  <p class="hero-domains">
-    <span class="domain">
-      <span class="domain-whisper" aria-hidden="true">binaries</span>
-      reverse engineering
-    </span>
-    <span aria-hidden="true">&middot;</span>
-    <span class="domain">
-      <span class="domain-whisper" aria-hidden="true">protocols</span>
-      systems security
-    </span>
-    <span aria-hidden="true">&middot;</span>
-    <span class="domain">
-      <span class="domain-whisper" aria-hidden="true">models</span>
-      ai security
-    </span>
-  </p>
-  <p class="hero-statement">mostly interested in what happens below the abstraction.</p>
-  <a class="hero-scroll" href="#writing">
-    <span>index</span>
-    <span aria-hidden="true">&darr;</span>
-  </a>
+<section class="scene-hero" data-scene-hero aria-labelledby="intro-title">
+  <div class="scene-hero__visual" aria-hidden="true">
+    <canvas data-signal-scene></canvas>
+    <div class="scene-fallback">
+      <i style="--w: 1"></i><i style="--w: 1"></i><i style="--w: 1"></i><i style="--w: 1"></i><i style="--w: 1"></i><i style="--w: 1"></i><i class="is-payload" style="--w: 5"></i><i style="--w: 2"></i>
+    </div>
+  </div>
+
+  <div class="scene-hero__inner">
+    <div class="scene-hero__copy reveal">
+      <p class="scene-kicker">independent security research / india</p>
+      <h1 id="intro-title">sumit<br>gupta</h1>
+      <p class="scene-statement">I take systems apart until the hidden trust becomes visible.</p>
+    </div>
+
+    <div class="scene-hero__legend reveal" aria-label="Research areas">
+      <span>01 / reverse engineering</span>
+      <span>02 / systems security</span>
+      <span>03 / ai security</span>
+    </div>
+
+    <a class="scene-hero__entry" href="#current-autopsy">current investigation <span aria-hidden="true">&#8595;</span></a>
+  </div>
+
+  <div class="scene-hero__telemetry" aria-hidden="true">
+    <span>frame / mavlink v1</span>
+    <span>integrity &ne; identity</span>
+    <span>scroll / reconstruct</span>
+  </div>
 </section>
 
-<div class="home-index">
-  <section id="writing" class="index-section reveal" aria-labelledby="writing-title">
-    <header class="index-heading">
-      <span aria-hidden="true">01</span>
-      <h2 id="writing-title">writing</h2>
-      <a href="{{ '/writing/' | relative_url }}">archive &nearr;</a>
-    </header>
+<section class="trust-fracture reveal" data-trust-fracture aria-labelledby="sequence-title">
+  <header class="folio-rule">
+    <span id="sequence-title">autopsy 001 / trust boundary</span>
+    <span>checksum / identity</span>
+  </header>
 
-    {% assign latest_post = site.posts.first %}
-    {% if latest_post %}
-      <a class="featured-note" href="{{ latest_post.url | relative_url }}">
-        <span class="featured-meta">
-          <time datetime="{{ latest_post.date | date_to_xmlschema }}">{{ latest_post.date | date: '%Y-%m-%d' }}</time>
-          <span>research note</span>
-        </span>
-        <strong>{{ latest_post.title }}</strong>
-        <span class="featured-description">{{ latest_post.description }}</span>
-        <span class="featured-arrow" aria-hidden="true">&nearr;</span>
-      </a>
-    {% else %}
-      <p class="muted">nothing published yet.</p>
-    {% endif %}
-  </section>
-
-  <section id="work" class="index-section reveal" aria-labelledby="work-title">
-    <header class="index-heading">
-      <span aria-hidden="true">02</span>
-      <h2 id="work-title">selected work</h2>
-      <a href="{{ '/projects/' | relative_url }}">all work &nearr;</a>
-    </header>
-
-    <div class="work-list">
-      {% assign featured_projects = site.projects | where: 'featured', true | sort: 'order' %}
-      {% for project in featured_projects %}
-        <a class="work-row" href="{{ project.url | relative_url }}">
-          <span class="work-number">0{{ forloop.index }}</span>
-          <span class="work-copy">
-            <strong>{{ project.title }}</strong>
-            <small>{{ project.description }}</small>
-          </span>
-          <span class="work-arrow" aria-hidden="true">&nearr;</span>
-        </a>
-      {% endfor %}
+  <div class="trust-fracture__body">
+    <div class="trust-fracture__statement">
+      <p class="scene-kicker">the fracture</p>
+      <h2>A valid packet can still be a lie.</h2>
+      <p>MAVLink v1 can verify structure and checksum. It cannot prove who created the frame.</p>
     </div>
-  </section>
 
-  <section id="about" class="index-section about-strip reveal" aria-labelledby="about-title">
-    <header class="index-heading">
-      <span aria-hidden="true">03</span>
-      <h2 id="about-title">about</h2>
-    </header>
-    <div class="about-copy">
-      <p>mostly interested in what happens below the abstraction.</p>
-      <p class="muted">reverse engineering, systems security, autonomous systems, and ai security.</p>
+    <ol class="frame-ledger" aria-label="MAVLink version 1 frame fields">
+      <li><span>00</span><strong>magic</strong><code>0xFE</code></li>
+      <li><span>01</span><strong>length</strong><code>1 byte</code></li>
+      <li><span>02</span><strong>sequence</strong><code>1 byte</code></li>
+      <li><span>03</span><strong>system id</strong><code>claimed</code></li>
+      <li><span>04</span><strong>component id</strong><code>claimed</code></li>
+      <li><span>05</span><strong>message id</strong><code>1 byte</code></li>
+      <li><span>06</span><strong>payload</strong><code>0–255</code></li>
+      <li><span>07</span><strong>checksum</strong><code>2 bytes</code></li>
+    </ol>
+  </div>
+</section>
+
+{% assign featured_post = site.posts.first %}
+{% if featured_post %}
+<section id="current-autopsy" class="current-autopsy reveal" aria-labelledby="current-title">
+  <header class="folio-rule">
+    <span>current signal autopsy</span>
+    <span>001 / protocol trust</span>
+  </header>
+
+  <a class="current-autopsy__link" href="{{ featured_post.url | relative_url }}">
+    <div class="current-autopsy__signal" aria-hidden="true">
+      <span style="--h: 24%; --d: 0"></span>
+      <span style="--h: 48%; --d: 1"></span>
+      <span style="--h: 32%; --d: 2"></span>
+      <span style="--h: 68%; --d: 3"></span>
+      <span style="--h: 44%; --d: 4"></span>
+      <span style="--h: 82%; --d: 5"></span>
+      <span style="--h: 56%; --d: 6"></span>
+      <span style="--h: 96%; --d: 7"></span>
+      <span style="--h: 72%; --d: 8"></span>
+      <span style="--h: 38%; --d: 9"></span>
+      <span style="--h: 64%; --d: 10"></span>
+      <span style="--h: 28%; --d: 11"></span>
     </div>
-    <p class="contact-line">
-      <a href="https://github.com/{{ site.github_username }}">github</a>
-      <a href="{{ site.linkedin_url }}">linkedin</a>
-      <a href="mailto:{{ site.email }}">email</a>
-    </p>
-  </section>
-</div>
+
+    <div class="current-autopsy__copy">
+      <p class="folio-label">featured investigation</p>
+      <h2 id="current-title">{{ featured_post.title }}</h2>
+      <p>{{ featured_post.description }}</p>
+    </div>
+
+    <div class="current-autopsy__meta">
+      <p><span>artifact</span>MAVLink v1 frame</p>
+      <p><span>state</span>field note</p>
+      <strong>open evidence <span aria-hidden="true">&#8599;</span></strong>
+    </div>
+  </a>
+</section>
+{% endif %}
+
+<section class="entry-points reveal" aria-labelledby="entry-title">
+  <header class="folio-rule">
+    <span id="entry-title">research index</span>
+    <span>three entrances / separate records</span>
+  </header>
+  <nav aria-label="Research index">
+    <a href="{{ '/writing/' | relative_url }}"><span>01</span><strong>writing</strong></a>
+    <a href="{{ '/projects/' | relative_url }}"><span>02</span><strong>projects</strong></a>
+    <a href="{{ '/about/' | relative_url }}"><span>03</span><strong>about</strong></a>
+  </nav>
+</section>

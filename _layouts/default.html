@@ -8,17 +8,11 @@
 
     <div class="site-shell">
       <header class="site-header">
-        <a class="site-name" href="{{ '/' | relative_url }}">sumit gupta</a>
+        <a class="site-name" href="{{ '/' | relative_url }}"><span class="signal-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>sumit gupta</span></a>
         <nav class="site-nav" aria-label="Primary navigation">
-          {% if page.layout == 'home' %}
-            <a href="#writing">writing</a>
-            <a href="#work">work</a>
-            <a href="#about">about</a>
-          {% else %}
-            <a{% if page.url == '/writing/' or page.layout == 'post' %} aria-current="page"{% endif %} href="{{ '/writing/' | relative_url }}">writing</a>
-            <a{% if page.url == '/projects/' or page.layout == 'project' %} aria-current="page"{% endif %} href="{{ '/projects/' | relative_url }}">projects</a>
-            <a{% if page.url == '/about/' %} aria-current="page"{% endif %} href="{{ '/about/' | relative_url }}">about</a>
-          {% endif %}
+          <a{% if page.url == '/writing/' or page.layout == 'post' %} aria-current="page"{% endif %} href="{{ '/writing/' | relative_url }}">writing</a>
+          <a{% if page.url == '/projects/' or page.layout == 'project' %} aria-current="page"{% endif %} href="{{ '/projects/' | relative_url }}">projects</a>
+          <a{% if page.url == '/about/' %} aria-current="page"{% endif %} href="{{ '/about/' | relative_url }}">about</a>
           <a href="https://github.com/{{ site.github_username }}">github</a>
         </nav>
       </header>
@@ -29,6 +23,7 @@
 
       <footer class="site-footer">
         <span>&copy; {{ site.time | date: '%Y' }} sumit gupta</span>
+        <span>reverse engineering / systems security / ai security</span>
         <nav aria-label="Contact links">
           <a href="https://github.com/{{ site.github_username }}">github</a>
           <a href="{{ site.linkedin_url }}">linkedin</a>
@@ -36,8 +31,12 @@
         </nav>
       </footer>
     </div>
+    <script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
     {% if page.layout == 'home' %}
-      <script src="{{ '/assets/js/site.js' | relative_url }}" defer></script>
+      <script src="{{ '/assets/vendor/gsap.min.js' | relative_url }}" defer></script>
+      <script src="{{ '/assets/vendor/ScrollTrigger.min.js' | relative_url }}" defer></script>
+      <script type="module" src="{{ '/assets/js/signal-scene.js' | relative_url }}"></script>
     {% endif %}
+    {% if page.evidence %}<script src="{{ '/assets/js/evidence-lens.js' | relative_url }}" defer></script>{% endif %}
   </body>
 </html>
